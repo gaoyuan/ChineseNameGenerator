@@ -47,23 +47,23 @@ def generate(fList, lList, firstNameLength = 0, first = '', last = ''):
     lastName = lList[randint(0,len(fList)-1)]
     
     # if first and/or last name is specified, use it
-    if first != ''
+    if first != '' :
         firstName = first
-    if last != ''
+    if last != '':
         lastName = last
     
     # return the name generated
-    return  lastName + firstName
+    return  lastName + ' ' +firstName
 
 def main():
     # parse the argument
     parser = argparse.ArgumentParser()
     parser.add_argument('-l', metavar = 'Integer',type = int, default = 0,
         help = 'specify the length of first name, if < 1, then randomly choose 1 or 2')
-    parser.add_argument('-first', metavar - 'String', type = String, default = '',
-                        help = 'specify the first name')
-    parser.add_argument('-last', metavar - 'String', type = String, default = '',
-                        help = 'specify the last name')
+    parser.add_argument('-first', metavar = 'String',  default = '',
+        help = 'specify the first name')
+    parser.add_argument('-last', metavar = 'String',  default = '',
+        help = 'specify the last name')
     args = parser.parse_args()
     
     listing = os.listdir(path) # get the filenames in the data path
@@ -73,7 +73,7 @@ def main():
     lastNames = getNames(path, lastNamesFiles, ',') # get all the last names
     
     # print the generated name
-    print generate(firstNames, lastNames, args. l, first, last)
+    print generate(firstNames, lastNames, args.l, args.first, args.last)
     
 if __name__ == "__main__":
     sys.exit(main())
