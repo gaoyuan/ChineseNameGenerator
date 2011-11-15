@@ -4,6 +4,7 @@
 import sys
 import os
 import re
+import argparse
 from random import randint
 
 path = 'Data/' # where the data is stored
@@ -39,15 +40,20 @@ def generate(fList, lList, firstNameLength = 0):
     while firstNameLength > 0:
         firstName = firstName + fList[randint(0,len(fList)-1)]
         firstNameLength = firstNameLength - 1   
-    return lList[randint(0,len(fList)-1)] + firstName
+    return lList[randint(0,len(fList)-1)] + ' ' + firstName
 
 def main():
+    # parse the argument
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-l', metavar = 'Integer',type = int, default = 0,
+        help = 'specify the length of first name, if < 1, then randomly choose 1 or 2')
+    args = parser.parse_args()
     listing = os.listdir(path)
     firstNamesFiles = getFiles(listing, fPtn)
     lastNamesFiles = getFiles(listing, lPtn)
     firstNames = getNames(path, firstNamesFiles, ',')
     lastNames = getNames(path, lastNamesFiles, ',')
-    print generate(firstNames, lastNames)
+    print generate(firstNames, lastNames, args. l)
     
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
